@@ -24,7 +24,6 @@ def build_service_handler():
         request_deserializer=request_deserializer,
         response_serializer=response_serializer
     )
-    call = type(method_handler)
 
     
     # Build a service handler
