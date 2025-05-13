@@ -18,9 +18,6 @@ class UserService:
         """Initialize with an empty user database."""
         self.users: Dict[int, User] = {}
     
-    # In a real Dubbo service, these methods would be exposed as RPC endpoints
-    # Here we're simulating the process with serialization/deserialization steps
-    
     def create_user(self, request_bytes: bytes) -> bytes:
         """Create a user from serialized request."""
         # Deserialize request
