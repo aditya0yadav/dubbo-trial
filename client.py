@@ -16,10 +16,10 @@ class GreeterServiceStub:
     def __init__(self, client: dubbo.Client):
         self.unary = client.unary(
             method_name="sayHello",
-            request_serializer=Callable[..., bytes],
-            response_deserializer=Callable[[bytes], object]
+            request_serializer=request_serializer,
+            response_deserializer=response_deserializer
         )
-
+        
     def say_hello(self, name: str) -> str:
         return self.unary(name)
 

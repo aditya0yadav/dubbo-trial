@@ -3,6 +3,7 @@ import dubbo
 from dubbo.configs import ServiceConfig
 from dubbo.proxy.handlers import RpcMethodHandler, RpcServiceHandler
 from common import RequestMessage, ResponseMessage
+call = None
 
 def request_deserializer(data: bytes) -> RequestMessage:
     return RequestMessage.deserialize(data)
@@ -13,7 +14,7 @@ def response_serializer(result: str) -> bytes:
 class GreeterServicer:
     def say_hello(self, request: RequestMessage) -> str:
         name = request.params.get("name", "Guest")
-        return f"Hello, {name}!"
+        return call
 
 def build_service_handler():
     # Build a method handler
@@ -23,6 +24,8 @@ def build_service_handler():
         request_deserializer=request_deserializer,
         response_serializer=response_serializer
     )
+    call = type(method_handler)
+
     
     # Build a service handler
     service_handler = RpcServiceHandler(
